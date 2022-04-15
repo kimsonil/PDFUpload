@@ -21,20 +21,19 @@ const SideNavigation: React.FC<Props> = (props: Props) =>{
     }else{
       setIslistItem(false);
     }
+    console.log(props.transform.x);
   },[props.transform])
   
   return (
   
     <div className="screen-right-sideBar">
      <div className="screen-right-sideBar-btn">
-          <button  className={props.selectTool === "select" ? "mybutton selected tooltip-btn" : "mybutton tooltip-btn"} onClick={() => props.setSelectTool('select')}>
-              <div className="select-btn"/>
-              <div className='tooltip tooltip-center' style={{top: 45,right: -15}}>선택 도구</div>
-          </button>
-          <button className={props.selectTool === "square_draw" ? "mybutton selected tooltip-btn" : "mybutton tooltip-btn"} onClick={() => props.setSelectTool('square_draw')}>
-              <div className="square_draw_btn" style={{width:12,height:12}}/>
-              <div className='tooltip tooltip-center' style={{top: 45,right: -15}}>사각형 도구</div>
-          </button>
+            <button  className={props.selectTool === "select" ? "mybutton selected" : "mybutton"} onClick={() => props.setSelectTool('select')}>
+                <div className="select-btn"/>
+            </button>
+            <button className={props.selectTool === "square_draw" ? "mybutton selected" : "mybutton"} onClick={() => props.setSelectTool('square_draw')}>
+                <div className="square_draw_btn" />
+            </button>
         </div>
      <div className="transform">  
           <div className="transform-title">트랜스폼</div>
@@ -45,22 +44,27 @@ const SideNavigation: React.FC<Props> = (props: Props) =>{
               <div className="transform-height"><span>H</span><input type="number" value={props.transform.height} disabled/></div>
           </div>
       </div>
-      <div className="default-setting-btn" ><div>기본 설정</div><button className="setting-open-btn tooltip-btn" onClick={props.handleClickDefaultSetting}>・・・<div className='tooltip tooltip-right'>기본 설정</div></button></div>
-      <button className="registration" disabled={!(islistItem)}>영역 등록</button>
+      <div className="default-setting-btn" ><div>기본 설정</div><button className="setting-open-btn" onClick={props.handleClickDefaultSetting}>・・・</button></div>
+      <button className="registration" disabled={!(islistItem && (props.selectTool === "square_draw"))}>등록하기</button>
       <div className='labCode-list'>
-       
+        {/* <div className='labCode-list-item'>
+        <div onDoubleClick={() => setIsInputState(true)}>
+          <span style={{display:isInputState?'none':'inline'}}>1번 문제</span>
+          <input style={{display:isInputState?'inherit':'none'}} defaultValue="1번 문제" />
+        </div>
+          <div className='labCode-list-item-icon'><button><img src={require("src/images/pages/icon-link.png").default} alt="icon-link" /></button><button><img src={require("src/images/pages/trash.png").default} alt="trash"/></button><button className="setting-open-btn" onClick={props.handleClickPartialSetting}>・・・</button></div></div> */}
           { islistItem  ? 
           <div className='labCode-list-item'>
           <div onDoubleClick={() => setIsInputState(true)}>
             
             <input ref={itemInputRef} defaultValue="영역" />
           </div>
-            <div className='labCode-list-item-icon'><button><img src={require("src/images/pages/icon-link.png").default} alt="icon-link" /></button><button><img src={require("src/images/pages/trash.png").default} alt="trash"/></button><button className="setting-open-btn tooltip-btn" onClick={props.handleClickPartialSetting}>・・・<div className='tooltip tooltip-right'>개별 설정</div></button></div></div>
+            <div className='labCode-list-item-icon'><button><img src={require("src/images/pages/icon-link.png").default} alt="icon-link" /></button><button><img src={require("src/images/pages/trash.png").default} alt="trash"/></button><button className="setting-open-btn" onClick={props.handleClickPartialSetting}>・・・</button></div></div>
             : <div></div>
           }
           
       </div>
-      {/* <div className='setting-apply'><div className='setting-apply-btn'>적용하기</div></div> */}
+      <div className='setting-apply'><div className='setting-apply-btn'>적용하기</div></div>
     </div>
   )
   

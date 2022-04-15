@@ -18,22 +18,14 @@ interface Props{
    }
 
 const ScreenContainer: React.FC<Props> = (props: Props) =>{
-  const screenContainer = useRef<HTMLDivElement | null>(null);
-  const [screenWidth, setScreenWidth] = useState(0);
-  const [screenHeight, setScreenHeight] = useState(0);
-  useEffect(() => {
-    setScreenWidth(Number(screenContainer.current?.offsetWidth));
-    setScreenHeight(Number(screenContainer.current?.offsetHeight));
-  },[])
-  
+   
   return (
   <div className='screen-container'>
     <div className="screen-left-sideBar" >
     <div className="page-count">페이지 {props.numPages}</div>
     <div className="flex-center" style={{flexDirection:"column"}}> 
     {[...Array(props.numPages)].map((item,index)=>{ return(
-    
-    <div key={index} className={index === 0 ? 'MovableList select' : 'MovableList'} onClick={(e) => props.hanldleClickPage(e,index+1)}>
+    <div key={index} className='MovableList' onClick={(e) => props.hanldleClickPage(e,index+1)}>
       <Document
         file={props.pdfState.file}
         onLoadSuccess={props.onDocumentLoadSuccess}
@@ -51,17 +43,17 @@ const ScreenContainer: React.FC<Props> = (props: Props) =>{
           )})}
       </div>
     </div>
-      <div className='screen-center-container' ref={screenContainer} >
+      <div className='screen-center-container'>
         <input type="file" id="ScreenPdf" onChange={props.onFileChange} accept=".pdf" />
         
-        <KonvaCanvasdraw selectTool={props.selectTool} setTransform={props.setTransform} KonvaWidth={screenWidth} KonvaHeight={screenHeight}/>
+        <KonvaCanvasdraw selectTool={props.selectTool} setTransform={props.setTransform}/>
         <div className="pdfImage">
       
         <Document
             file={props.pdfState.file}
             onLoadSuccess={props.onDocumentLoadSuccess}
             noData={<h4></h4>}
-            width={screenContainer.current?.offsetWidth}
+            width={1200}
           >
             <Page pageNumber={props.pageNumber} />
         </Document>
