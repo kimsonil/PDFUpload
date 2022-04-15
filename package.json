@@ -1,5 +1,5 @@
 {
-  "name": "mozzic",
+  "name": "PDFUpload",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -96,10 +96,10 @@
   },
   "main": "public/electron.js",
   "homepage": "./",
-  "author": "mozzic",
+  "author": "PDFUpload",
   "build": {
-    "productName": "mozzic",
-    "appId": "com.electron.mozzic",
+    "productName": "PDFUpload",
+    "appId": "com.electron.PDFUpload",
     "asar": false,
     "mac": {
       "hardenedRuntime": true,
@@ -110,9 +110,9 @@
       "icon": "build/icon.png"
     },
     "protocols": {
-      "name": "mozzic",
+      "name": "PDFUpload",
       "schemes": [
-        "mozzic"
+        "PDFUpload"
       ]
     },
     "asarUnpack": [
